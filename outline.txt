@@ -1,0 +1,34 @@
+Outline
+- Why I wanted to learn go
+  expectations
+  intro to C
+  what I found
+
+Go vs C as a language
+	types (base, composite)
+	memory management / pointers
+	functions (and error handling)
+	OOP
+	Encapsulation
+	Mention reflection
+
+Concurrency:
+	Goroutines
+	Mutexes & co
+
+Facilities:
+        zero values
+	no implicit casting
+	defer
+	unused imports / variables
+
+Go vs C: tooling
+	standard library
+	dependency management (single executable, go get)
+	go tool, profiling, fmt, race detector, test
+
+CGO:
+	interaction between C and Go
+
+Conclusion
+

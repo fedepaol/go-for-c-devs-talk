@@ -1,0 +1,213 @@
+Golang for C developers
+
+Federico Paolinelli
+List
+@fedepaol
+
+* About me
+
+- Lead developer at List
+- Pythonist
+- Not a Go expert
+- Android Developer
+
+* Why I started this journey
+
+We do distributed systems, and we (also) use C
+
+Go's elevator pitch:
+
+- fast
+- good at networking and multiprocessing
+- scales well
+
+* On top of that, Go claims to be
+
+- comprehensible
+- statically typed
+- fast to work in
+- doesn't require tools, but supports them well
+
+* Let's talk about C
+: niche use cases
+: the "latin" of programming languages
+
+* Very simple
+
+You have Structs
+.code structs.c
+
+and functions
+.code functions.c
+
+and that's it.
+No objects, inheritance, polymorphism.
+
+* Oh, and you have pointers
+.code pointers.c
+Direct access to memory locations. 
+It's only way to pass references around instead of copies.
+
+* What I like about C
+- direct control of things (pointers!)
+- no hidden costs
+- *you*understand*what*you*are*reading*
+
+* What I don't like about C
+- *verbose*
+- easy to shoot on your foot
+- limited standard library
+- dependency management
+
+*Do*we*always*need*that*kind*of*control?*
+
+: memory leaks, direct access to memory
+: if you need a data structure, you need to reimplement it or rely on external libraries
+
+* The recipe for Go
+
+- Go back to the 70s / 80s and find a bunch of great programmers. Say, Ken Thompson, Rob Pike, people like that. Marinate them in Bell Labs for 30 years, during which time they code in C, keep developing Unix, invent Plan 9, UTF-8, and other wonderful things.
+
+- Take them out, seduce them with Python, wow them with Google-scale computing. Add more amazing programmers (Brad Fitzpatrick for example), stir in Google’s near-unlimited resources.
+
+- Ask them how they would do C now, if they could start from scratch.
+
+.caption _credits_ by [[https://www.darkcoding.net/software/go-lang-after-four-months/][Graham King]]
+
+* What I did expect from Go
+
+* Other languages I (barely) know
+Kotlin
+.code sample.kt
+
+Javascript
+.code sample.js
+
+Java
+.code sample.java
+
+* Doing a lot with few lines of code
+
+.image lambdas.jpg 400 _
+
+: languages as products. They copy each others and keep adding features
+: Too dense!
+
+* What I found
+
+Simple apply/filter/reduce package by Rob Pike:
+
+.link https://github.com/robpike/filter
+
+From the repo readme:
+I wanted to see how hard it was to implement this sort of thing in Go, with as nice an API as I could manage. It wasn't hard.
+Having written it a couple of years ago, I haven't had occasion to use it once.
+ *Instead*,*I*just*use*"for"*loops.*
+You shouldn't use it either.
+
+.image run.png
+
+* Go focuses on
+- being explicit rather than implicit
+- being readable
+- getting sh*t done
+
+* Let's dive in
+
+* Basic data types
+
+As in C, we do have integers, floats, booleans:
+.code basictypes.go
+
+Go provides a higher level _string_ type:
+
+.code strings.go
+
+Implicit casts are not allowed
+
+.code basictypes2.go
+
+* Composite data types:
+
+- arrays
+- slices
+- maps
+- structs
+
+* Arrays
+In C:
+.code arrays.c
+
+- length is not a property
+- shortcut for pointer arithmetic (non initialized, out of bound errors write in memory)
+
+In Go: 
+.code arrays.go
+
+- Fixed lenght
+- Passed by value
+
+* Slices
+.code slices.go
+
+- Backed by arrays
+- Resized by append
+- Holds a reference of the underlying array
+
+Can be iterated:
+
+.code sliceiterate.go
+
+* Maps 
+Maps are the most abused and useful data structure.
+
+.code maps.go
+
+- no native equivalent in C
+- they hold a reference to the data
+- also used as sets
+
+Can be iterated too:
+
+.code mapiterate.go
+
+
+* Memory management
+
+- heap vs stack
+.code malloc.c
+
+- efficient
+- the dev is in control of what lives in the stack and what in the heap
+- easy to forget the lifecycle of malloc'ed objects
+
+* Memory management
+// TODO Inset heartbleed
+*The*most*effective*way*to*shoot*in*your*foot*
+
+* Memory management in Go
+
+There are pointers too, which is good: the dev is in control of what is passed by value and what by reference 
+
+.code pointers.go
+
+- the compiler chooses what to leave on the stack and what on the heap
+- garbage collected
+- pointers are references to live objects: there is no way to mess up with the memory
+: differenza con altri linguaggi dove tutto e` per reference 
+: no boxing
+
+* Functions
+
+
+* User defined data structures
+C structs:
+.code structs.c
+Go Structs
+.code struct.go
+
+* Go structures vs classes
+- no inheritance
+- the language pushes composition
+
+
