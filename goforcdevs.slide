@@ -134,14 +134,13 @@ Implicit casts are not allowed
 - maps
 - structs
 
-* Arrays
-In C:
+* Arrays in C:
 .code arrays.c
 
 - length is not a property
 - shortcut for pointer arithmetic (non initialized, out of bound errors write in memory)
 
-In Go: 
+* Arrays in Go: 
 .code arrays.go
 
 - Fixed lenght
@@ -172,7 +171,7 @@ Can be iterated too:
 .code mapiterate.go
 
 
-* Memory management
+* Memory management in C
 
 - heap vs stack
 .code malloc.c
@@ -181,8 +180,10 @@ Can be iterated too:
 - the dev is in control of what lives in the stack and what in the heap
 - easy to forget the lifecycle of malloc'ed objects
 
-* Memory management
-// TODO Inset heartbleed
+* Memory management in C
+
+.image heartbleed.png 400 _
+
 *The*most*effective*way*to*shoot*in*your*foot*
 
 * Memory management in Go
@@ -191,7 +192,7 @@ There are pointers too, which is good: the dev is in control of what is passed b
 
 .code pointers.go
 
-- the compiler chooses what to leave on the stack and what on the heap
+- using escape analysis, the compiler chooses what to leave on the stack and what on the heap
 - garbage collected
 - pointers are references to live objects: there is no way to mess up with the memory
 : differenza con altri linguaggi dove tutto e` per reference 
@@ -199,6 +200,15 @@ There are pointers too, which is good: the dev is in control of what is passed b
 
 * Functions
 
+.code functions.go
+
+- multiple return values (error handling)
+- first class values
+- can be anonymous
+
+.code closure.go
+
+* Let's talk about OOP
 
 * User defined data structures
 C structs:
@@ -207,7 +217,22 @@ Go Structs
 .code struct.go
 
 * Go structures vs classes
+
 - no inheritance
-- the language pushes composition
+- no generics
+- enforce composition
+
+.image eighties.jpg 400 _
+
+* Go structures
+
+_If_C++_and_Java_are_about_type_hierarchies_and_the_taxonomy_of_types,_Go_is_about_composition._ (Rob Pike)
+
+.code embedding.go
+
+* Methods
+
+- 
+
 
 
