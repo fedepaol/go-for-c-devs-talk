@@ -21,6 +21,9 @@ Facilities:
 	no implicit casting
 	defer
 	unused imports / variables
+	_ to ignore 
+	named returns
+	assegnamento in if
 
 Go vs C: tooling
 	standard library

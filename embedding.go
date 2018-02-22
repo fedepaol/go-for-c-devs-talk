@@ -1,9 +1,9 @@
-type Vehchle struct {
+type Vehicle struct {
 	wheels int
 }
 
 type Bike struct {
-	Vehicle
+	Vehicle      // embedding
 	pedals int
 }
 
