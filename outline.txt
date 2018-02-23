@@ -8,9 +8,13 @@ Go vs C as a language
 	types (base, composite)
 	memory management / pointers
 	functions (and error handling)
-	OOP
+
+Less ways to shoot in your foot
+
+OOP
 	Encapsulation
 	Mention reflection
+
 
 Concurrency:
 	Goroutines
@@ -35,3 +39,4 @@ CGO:
 
 Conclusion
 
+memory efficient (no boxing, locality)

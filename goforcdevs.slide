@@ -150,12 +150,7 @@ Implicit casts are not allowed
 .code slices.go
 
 - Backed by arrays
-- Resized by append
-- Holds a reference of the underlying array
-
-Can be iterated:
-
-.code sliceiterate.go
+- Automatically resized by append
 
 * Maps 
 Maps are the most abused and useful data structure.
@@ -165,10 +160,6 @@ Maps are the most abused and useful data structure.
 - no native equivalent in C
 - they hold a reference to the data
 - also used as sets
-
-Can be iterated too:
-
-.code mapiterate.go
 
 
 * Memory management in C
@@ -207,6 +198,41 @@ There are pointers too, which is good: the dev is in control of what is passed b
 - can be anonymous
 
 .code closure.go
+
+* Nice things about GO
+
+* It's safer
+
+Prevents side effects related to distractions 
+
+- assignement between different types requires explicit conversion
+.code casting.c
+- variables are initialized with zero values
+.code initialization.c
+- no pointer arithmetic
+.code pointerarit.c
+
+* (A bit) less verbose 
+
+- No ;
+- No () around ifs
+- Type inference, short variable declaration
+.code variable.go
+- Multiple return values (also, named return values)
+.code multiple.go
+
+
+* (A bit) less verbose (and more readable)
+
+- literal initializations
+- Range loops (in maps, slices and strings)
+.code range.go
+- Can't have unused variables
+- _ to say that a result is not interesting
+.code ignore.go
+- defer() to call finalizing operations inside a function
+- no break in switch, switch cases can be conditions
+
 
 * Let's talk about OOP
 
@@ -249,11 +275,154 @@ _If_C++_and_Java_are_about_type_hierarchies_and_the_taxonomy_of_types,_Go_is_abo
 - Can be checked
 
 .code interfaceassertion.go
-
-* In C
-_void*_ is the passpartout
-
-You can cast anything to anything else, so nobody checks 
-
-
 : you can retro assign an interface to any object
+
+* Encapsulation in C
+
+.image encapsulation.jpeg 300 _
+
+static modifier for functions and variables
+
+- Local to a .c file
+- Directly related to exported names available during linking
+
+* Encapsulation in Go:
+- The visibility is related to the _package_
+- Multiple files can belong to the same package
+- The visibility is toggled by uppercasing / lowercasing 
+
+No class related public, private.
+
+No inheritance so protected does not make sense
+
+* What is the nightmare of every C programmer? 
+
+* Multithreading
+
+A bug in multithreading can result in memory corruption with unexpected and unpredictable results. Moreover, it could happen in very rare situations difficult to reproduce with tests.
+
+What's more, a wrong usage of the locking primitives can result in a deadlock of two or more threads.
+
+*Getting*threading*right*is*difficult*
+
+* pthread.h
+
+Provide primitives to create and synchronize threads together.
+
+- Mutexes
+- Condition variables
+- Semaphores
+
+_Multithreading_is_today's_goto_:_
+- hard to read / understand
+- difficult to debug
+
+What we need is a better solution for concurrency, easier to understand and to handle
+
+* Enters goroutine
+
+Goroutines are lightweight threads managed by the Go runtime.
+
+	go myFunction()
+
+*Why*lighter?*
+
+- smaller (altough variable) stack
+- many goroutines can be share a single os thread
+- scheduling not invoked periodically but as a consequence of synchronization
+
+
+_It_is_practical_to_create_hundreds_of_thousands_of_goroutines_in_the_same_address_space_
+
+
+* Why they are different?
+
+.image differentfromthreads.jpg
+
+* Channels
+
+A channel is a communication mechanism between two goroutines
+
+	ch := make(chan int)
+
+We can send values to a channel
+
+	ch <- 23
+
+or receive from a channel
+
+	res := <- ch
+
+or just check if send has happened
+
+	<- ch
+
+Channels can be buffered or unbuffered.
+Sending on a full channel blocks the sender, receiving from an empty channel blocks the receiver.
+
+* Goroutines are indipendent executing actors communicating via channels
+.image concurrency.jpeg
+
+Definetely easier to reason about
+
+* An example
+
+.play goroutine.go
+
+* But I want mutexes!
+
+* Go provides synchronization primitives
+- Mutexes
+- RW Locks
+- sync.Once
+
+*Bonus*point:*
+Race detector, just build with _-race_ flag
+
+* But I really really miss pointer arithmetic!
+
+* 
+.image picard-facepalm.jpg
+
+* Unsafe package
+
+To be used *only* for performance critical sections!
+
+The package name is self explanatory and provides offsets and pointers.
+
+Remember to make one-liner statements since memory could be moved / collected.
+
+* Everything else
+
+* Building
+
+There is no need of external tools such as makefiles.
+Go looks for imported packages in the corresponding directories
+
+Go build / install compiles the packages in the current directory
+
+The _go_get_ command fetches required packages and install them in the current $GOPATH path
+
+* Deploying
+There is no need for shared libraries. Not even libc.
+
+The go runtime is linked together with the executable. The absence of external dependencies makes the deployement a lot easier than a C executable.
+
+* Bells and whistles
+- rich standard library
+- awesome echosystem (https://github.com/avelino/awesome-go)
+- integrated testing framework
+- native cpu and memory profiling
+- go fmt
+
+* Where to go from here
+
+Official website
+.link http://golang.org
+
+Interactive Tutorial
+.link http://tour.golang.org
+
+Mailing list
+.link https://groups.google.com/forum/#!forum/golang-nuts
+
