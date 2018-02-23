@@ -233,6 +233,19 @@ Prevents side effects related to distractions
 - defer() to call finalizing operations inside a function
 - no break in switch, switch cases can be conditions
 
+* But I really really miss pointer arithmetic!
+
+* 
+.image picard-facepalm.jpg
+
+* Unsafe package
+
+To be used *only* for performance critical sections!
+
+The package name is self explanatory and provides offsets and pointers.
+
+Remember to make one-liner statements since memory could be moved / collected.
+
 
 * Let's talk about OOP
 
@@ -295,7 +308,14 @@ No class related public, private.
 
 No inheritance so protected does not make sense
 
-* What is the nightmare of every C programmer? 
+* The worst nightmare of every (C) programmer
+
+
+* 
+
+Knock knock. 
+Race condition. 
+Who's there?
 
 * Multithreading
 
@@ -378,19 +398,6 @@ Definetely easier to reason about
 
 *Bonus*point:*
 Race detector, just build with _-race_ flag
-
-* But I really really miss pointer arithmetic!
-
-* 
-.image picard-facepalm.jpg
-
-* Unsafe package
-
-To be used *only* for performance critical sections!
-
-The package name is self explanatory and provides offsets and pointers.
-
-Remember to make one-liner statements since memory could be moved / collected.
 
 * Everything else
 
