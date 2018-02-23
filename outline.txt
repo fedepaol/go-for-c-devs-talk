@@ -27,7 +27,8 @@ Facilities:
 	unused imports / variables
 	_ to ignore 
 	named returns
-	assegnamento in if
+	assegnamento in if, range
+	select statements
 
 Go vs C: tooling
 	standard library
