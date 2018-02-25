@@ -314,8 +314,11 @@ static modifier for functions and variables
 - Multiple files can belong to the same package
 - The visibility is toggled by uppercasing / lowercasing 
 
-No class related public, private.
 
+	var Exported int
+	var notExported string
+
+No class related public, private.
 No inheritance so protected does not make sense
 
 * The worst nightmare of every (C) programmer
