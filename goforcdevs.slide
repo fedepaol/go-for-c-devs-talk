@@ -7,9 +7,12 @@ List
 * About me
 
 - Lead developer at List
-- Android Developer
 - Not a Go expert
-- Know some python
+
+Things I tinker with in my spare time:
+
+- Android
+- Some python
 
 * Why I started this journey
 
@@ -127,13 +130,6 @@ Implicit casts are not allowed
 
 .code basictypes2.go
 
-* Composite data types:
-
-- arrays
-- slices
-- maps
-- structs
-
 * Arrays in C:
 .code arrays.c
 
@@ -161,6 +157,15 @@ Maps are the most abused and useful data structure.
 - they hold a reference to the data
 - also used as sets
 
+* Functions
+
+.code functions.go
+
+- multiple return values (error handling)
+- first class values
+- can be anonymous
+
+.code closure.go
 
 * Memory management in C
 
@@ -189,15 +194,27 @@ There are pointers too, which is good: the dev is in control of what is passed b
 : differenza con altri linguaggi dove tutto e` per reference 
 : no boxing
 
-* Functions
+* But I really really miss pointer arithmetic!
 
-.code functions.go
+* 
+.image picard-facepalm.jpg
 
-- multiple return values (error handling)
-- first class values
-- can be anonymous
+* Unsafe package
 
-.code closure.go
+The package name is self explanatory.
+It provides Pointers.
+
+- A pointer value of any type can be converted to a Pointer.
+- A Pointer can be converted to a pointer value of any type.
+
+	func Float64bits(f float64) uint64 {
+		return *(*uint64)(unsafe.Pointer(&f))
+	}
+
+- Pointer arithmetic 
+
+	f := unsafe.Pointer(uintptr(unsafe.Pointer(&s)) + unsafe.Offsetof(s.f))
+
 
 * Nice things about GO
 
@@ -233,19 +250,11 @@ Prevents side effects related to distractions
 - defer() to call finalizing operations inside a function
 - no break in switch, switch cases can be conditions
 
-* But I really really miss pointer arithmetic!
+* Productivity boost!
 
-* 
-.image picard-facepalm.jpg
+Compiling is *really* fast
 
-* Unsafe package
-
-To be used *only* for performance critical sections!
-
-The package name is self explanatory and provides offsets and pointers.
-
-Remember to make one-liner statements since memory could be moved / collected.
-
+.image compiling.png
 
 * Let's talk about OOP
 
@@ -290,9 +299,11 @@ _If_C++_and_Java_are_about_type_hierarchies_and_the_taxonomy_of_types,_Go_is_abo
 .code interfaceassertion.go
 : you can retro assign an interface to any object
 
-* Encapsulation in C
+* Encapsulation
 
-.image encapsulation.jpeg 300 _
+.image encapsulation.jpeg _ 400
+
+* Encapsulation in C
 
 static modifier for functions and variables
 
@@ -389,7 +400,7 @@ Definetely easier to reason about
 
 .play goroutine.go
 
-* But I want mutexes!
+* Where are my mutexes?
 
 * Go provides synchronization primitives
 - Mutexes
@@ -401,14 +412,56 @@ Race detector, just build with _-race_ flag
 
 * Everything else
 
+* Coding style
+
+.image spacestabs.png 250 _
+
+.caption Survey by [[https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs/][stackoverflow]] 
+
+Go fmt formats the code in the "go way"
+
+- easier to read
+- easier to write
+- no tabs vs spaces discussions!
+
 * Building
 
-There is no need of external tools such as makefiles.
-Go looks for imported packages in the corresponding directories
+Workspace: root tree pointed by $GOPATH variable 
 
-Go build / install compiles the packages in the current directory
+	bin/
+	    hello                          # command executable
+	pkg/
+	    linux_amd64/
+		github.com/fedepaol/example/
+		    stringutil.a           # package object
+	src/
+	    github.com/fedepaol/example/
+		hello/
+		    hello.go               # command source
+		    stringutil.go
+	    golang.org/x/image/
+		bmp/
+		    reader.go              # package source
+		    writer.go              # package source
 
-The _go_get_ command fetches required packages and install them in the current $GOPATH path
+
+
+* Building (2)
+
+*go*build* _package_
+
+- non main packages are compiled and thrown away
+- executables are compiled and left in the current dir
+
+*go*install* _package_
+
+- non main packages are deployed in $GOPATH/pkg
+- executables in $GOPATH/bin
+
+*go*get* github.com/fedepaol/example/hello
+
+- downloads the package and its dependencies
+- *installs* it
 
 * Deploying
 There is no need for shared libraries. Not even libc.
@@ -420,16 +473,20 @@ The go runtime is linked together with the executable. The absence of external d
 - awesome echosystem (https://github.com/avelino/awesome-go)
 - integrated testing framework
 - native cpu and memory profiling
-- go fmt
+- cross compiles
+- awesome linters
 
 * Where to go from here
 
-Official website
+- Official website
 .link http://golang.org
 
-Interactive Tutorial
+- Interactive Tutorial
 .link http://tour.golang.org
 
-Mailing list
+- Effective go
+.link https://golang.org/doc/effective_go.html
+
+- Mailing list
 .link https://groups.google.com/forum/#!forum/golang-nuts
 
