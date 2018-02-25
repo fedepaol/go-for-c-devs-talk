@@ -3,6 +3,8 @@ Golang for C developers
 Federico Paolinelli
 List
 @fedepaol
+fedepaol@gmail.com
+
 
 * About me
 
@@ -12,7 +14,7 @@ List
 Things I tinker with in my spare time:
 
 - Android
-- Some python
+- Some Python
 
 * Why I started this journey
 
@@ -195,9 +197,6 @@ There are pointers too, which is good: the dev is in control of what is passed b
 : no boxing
 
 * But I really really miss pointer arithmetic!
-
-* 
-.image picard-facepalm.jpg
 
 * Unsafe package
 
@@ -444,6 +443,7 @@ Workspace: root tree pointed by $GOPATH variable
 		    reader.go              # package source
 		    writer.go              # package source
 
+_Most_Go_programmers_keep_all_their_Go_source_code_and_dependencies_in_a_single_workspace_
 
 
 * Building (2)
@@ -458,7 +458,7 @@ Workspace: root tree pointed by $GOPATH variable
 - non main packages are deployed in $GOPATH/pkg
 - executables in $GOPATH/bin
 
-*go*get* github.com/fedepaol/example/hello
+*go*get* _package_ (as in github.com/fedepaol/example/hello)
 
 - downloads the package and its dependencies
 - *installs* it
