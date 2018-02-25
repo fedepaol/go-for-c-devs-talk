@@ -310,16 +310,25 @@ static modifier for functions and variables
 - Directly related to exported names available during linking
 
 * Encapsulation in Go:
+
+Every file belongs to a package
+
+	package mypackage
+
+	var Exported int
+	var notExported string
+	
 - The visibility is related to the _package_
 - Multiple files can belong to the same package
 - The visibility is toggled by uppercasing / lowercasing 
 
+	import "mypackage"
 
-	var Exported int
-	var notExported string
+	var a = mypackage.Exported // ok
+	var b = mypackage.notExported // compiler error 
+
 
 No class related public, private.
-No inheritance so protected does not make sense
 
 * The worst nightmare of every (C) programmer
 
