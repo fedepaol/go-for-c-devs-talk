@@ -17,23 +17,6 @@ Things I tinker with in my spare time:
 - Android
 - Python
 
-* Why I started this journey
-
-We do distributed systems, and we (also) use C
-
-Go's elevator pitch:
-
-- fast
-- good at networking and multiprocessing
-- scales well
-
-* On top of that, Go claims to be
-
-- comprehensible
-- statically typed
-- easy to learn
-- doesn't require tools, but supports them well
-
 * Let's talk about C
 : niche use cases
 : the "latin" of programming languages
@@ -55,6 +38,7 @@ Direct access to memory locations.
 It's only way to pass references around instead of copies.
 
 * What I like about C
+- *fast*
 - direct control of things (pointers!)
 - no hidden costs
 - *you*understand*what*you*are*reading*
@@ -65,10 +49,18 @@ It's only way to pass references around instead of copies.
 - limited standard library
 - dependency management
 
-*Do*we*always*need*that*kind*of*control?*
+* Do we always need that kind of control? 
 
 : memory leaks, direct access to memory
 : if you need a data structure, you need to reimplement it or rely on external libraries
+
+* Go's elevator pitch:
+
+- fast (C-ish fast)
+- good at networking and multiprocessing
+- scales well
+- easy to learn
+- comprehensible
 
 * The recipe for Go
 
@@ -283,7 +275,7 @@ _If_C++_and_Java_are_about_type_hierarchies_and_the_taxonomy_of_types,_Go_is_abo
 
 .code methods.go
 
-; can assign methods to any type, even those you don't own
+: can assign methods to any type, even those you don't own
 
 * Interfaces
 
@@ -398,6 +390,8 @@ or just check if send has happened
 
 Channels can be buffered or unbuffered.
 Sending on a full channel blocks the sender, receiving from an empty channel blocks the receiver.
+
+: channels are VALUES
 
 * Goroutines are indipendent executing actors communicating via channels
 .image concurrency.jpeg
