@@ -9,12 +9,13 @@ fedepaol@gmail.com
 * About me
 
 - Lead developer at List
-- Not a Go expert
+- C on daily basis
+- Learning Golang
 
 Things I tinker with in my spare time:
 
 - Android
-- Some Python
+- Python
 
 * Why I started this journey
 
@@ -30,7 +31,7 @@ Go's elevator pitch:
 
 - comprehensible
 - statically typed
-- fast to work in
+- easy to learn
 - doesn't require tools, but supports them well
 
 * Let's talk about C
@@ -81,9 +82,7 @@ It's only way to pass references around instead of copies.
 
 * What I did expect from Go
 
-* Other languages I (barely) know
-Kotlin
-.code sample.kt
+* Doing a lot with few lines of code
 
 Javascript
 .code sample.js
@@ -91,9 +90,9 @@ Javascript
 Java
 .code sample.java
 
-* Doing a lot with few lines of code
+Kotlin
+.code sample.kt
 
-.image lambdas.jpg 400 _
 
 : languages as products. They copy each others and keep adding features
 : Too dense!
@@ -379,8 +378,6 @@ _It_is_practical_to_create_hundreds_of_thousands_of_goroutines_in_the_same_addre
 
 * Why they are different?
 
-.image differentfromthreads.jpg
-
 * Channels
 
 A channel is a communication mechanism between two goroutines
@@ -480,8 +477,8 @@ There is no need for shared libraries. Not even libc.
 
 The go runtime is linked together with the executable. The absence of external dependencies makes the deployement a lot easier than a C executable.
 
-* Bells and whistles
-- reflection!
+* There's more!
+- reflection
 - C interoperability
 - rich standard library
 - awesome echosystem (https://github.com/avelino/awesome-go)
