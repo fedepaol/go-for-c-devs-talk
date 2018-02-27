@@ -481,6 +481,8 @@ There is no need for shared libraries. Not even libc.
 The go runtime is linked together with the executable. The absence of external dependencies makes the deployement a lot easier than a C executable.
 
 * Bells and whistles
+- reflection!
+- C interoperability
 - rich standard library
 - awesome echosystem (https://github.com/avelino/awesome-go)
 - integrated testing framework
