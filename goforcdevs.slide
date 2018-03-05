@@ -368,7 +368,7 @@ Goroutines are lightweight threads managed by the Go runtime.
 _It_is_practical_to_create_hundreds_of_thousands_of_goroutines_in_the_same_address_space_
 
 
-* Why they are different?
+* Why are they different?
 
 * Channels
 
