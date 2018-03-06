@@ -36,6 +36,7 @@ No objects, inheritance, polymorphism.
 .code pointers.c
 Direct access to memory locations. 
 It's only way to pass references around instead of copies.
+: l'incubo di ogni studente di informatica
 
 * What I like about C
 - *fast*
@@ -253,12 +254,6 @@ C structs:
 .code structs.c
 Go Structs
 .code struct.go
-
-* No classes in Go
-
-_If_C++_and_Java_are_about_type_hierarchies_and_the_taxonomy_of_types,_Go_is_about_composition._ (Rob Pike)
-
-.code embedding.go
 
 * Go structures vs classes
 
