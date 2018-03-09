@@ -5,21 +5,24 @@ List
 @fedepaol
 fedepaol@gmail.com
 
-
 * About me
 
 - Lead developer at List
 - C on daily basis
-- Learning Golang
 
 Things I tinker with in my spare time:
 
 - Android
 - Python
 
+: Sistemi distribuiti. Cluster di microservices che parlano fra di loro e con entita' esterne
+: Questo talk e` parte del processo in cui sto imparando Go
+
+
 * Let's talk about C
 : niche use cases
 : the "latin" of programming languages
+
 
 * Very simple
 
@@ -29,13 +32,13 @@ You have Structs
 and functions
 .code functions.c
 
-and that's it.
-No objects, inheritance, polymorphism.
+: and that's it.
 
 * Oh, and you have pointers
 .code pointers.c
 Direct access to memory locations. 
 It's only way to pass references around instead of copies.
+
 : l'incubo di ogni studente di informatica
 
 * What I like about C
@@ -50,18 +53,7 @@ It's only way to pass references around instead of copies.
 - limited standard library
 - dependency management
 
-* Do we always need that kind of control? 
-
-: memory leaks, direct access to memory
-: if you need a data structure, you need to reimplement it or rely on external libraries
-
-* Go's elevator pitch:
-
-- fast (C-ish fast)
-- good at networking and multiprocessing
-- scales well
-- easy to learn
-- comprehensible
+* The recipe for Go
 
 * The recipe for Go
 
@@ -73,41 +65,21 @@ It's only way to pass references around instead of copies.
 
 .caption _credits_ by [[https://www.darkcoding.net/software/go-lang-after-four-months/][Graham King]]
 
-* What I did expect from Go
 
-* Doing a lot with few lines of code
+* Can a language be fast and fun to use?
 
-Javascript
-.code sample.js
+: memory leaks, direct access to memory
+: if you need a data structure, you need to reimplement it or rely on external libraries
 
-Java
-.code sample.java
+.image gograph.png 400 _
 
-Kotlin
-.code sample.kt
+* Go's elevator pitch:
 
-
-: languages as products. They copy each others and keep adding features
-: Too dense!
-
-* What I found
-
-Simple apply/filter/reduce package by Rob Pike:
-
-.link https://github.com/robpike/filter
-
-From the repo readme:
-I wanted to see how hard it was to implement this sort of thing in Go, with as nice an API as I could manage. It wasn't hard.
-Having written it a couple of years ago, I haven't had occasion to use it once.
- *Instead*,*I*just*use*"for"*loops.*
-You shouldn't use it either.
-
-.image run.png
-
-* Go focuses on
-- being explicit rather than implicit
-- being readable
-- getting sh*t done
+- fast (C-ish fast)
+- good at networking and multiprocessing
+- scales well
+- easy to learn
+- comprehensible
 
 * Let's dive in
 
@@ -120,17 +92,13 @@ Go provides a higher level _string_ type:
 
 .code strings.go
 
-Implicit casts are not allowed
-
-.code basictypes2.go
-
 * Arrays in C:
 .code arrays.c
 
 - length is not a property
 - shortcut for pointer arithmetic (non initialized, out of bound errors write in memory)
 
-* Arrays in Go: 
+*Arrays*in*Go:* 
 .code arrays.go
 
 - Fixed lenght
@@ -139,17 +107,14 @@ Implicit casts are not allowed
 * Slices
 .code slices.go
 
-- Backed by arrays
+- Dynamically sized
 - Automatically resized by append
 
 * Maps 
-Maps are the most abused and useful data structure.
 
 .code maps.go
 
 - no native equivalent in C
-- they hold a reference to the data
-- also used as sets
 
 * Functions
 
@@ -160,6 +125,8 @@ Maps are the most abused and useful data structure.
 - can be anonymous
 
 .code closure.go
+
+* Memory management
 
 * Memory management in C
 
@@ -174,19 +141,17 @@ Maps are the most abused and useful data structure.
 
 .image heartbleed.png 400 _
 
-*The*most*effective*way*to*shoot*in*your*foot*
-
 * Memory management in Go
 
 There are pointers too, which is good: the dev is in control of what is passed by value and what by reference 
 
 .code pointers.go
 
-- using escape analysis, the compiler chooses what to leave on the stack and what on the heap
 - garbage collected
 - pointers are references to live objects: there is no way to mess up with the memory
 : differenza con altri linguaggi dove tutto e` per reference 
 : no boxing
+: using escape analysis, the compiler chooses what to leave on the stack and what on the heap
 
 * But I really really miss pointer arithmetic!
 
@@ -220,23 +185,17 @@ Prevents side effects related to distractions
 - no pointer arithmetic
 .code pointerarit.c
 
-* (A bit) less verbose 
+* Doing more with (a bit) less
 
-- No ;
-- No () around ifs
+- No ; nor () around ifs
 - Type inference, short variable declaration
 .code variable.go
 - Multiple return values (also, named return values)
 .code multiple.go
 
+* Doing more with less
 
-* (A bit) less verbose (and more readable)
-
-- literal initializations
 - Range loops (in maps, slices and strings)
-.code range.go
-- Can't have unused variables
-- _ to say that a result is not interesting
 .code ignore.go
 - defer() to call finalizing operations inside a function
 - no break in switch, switch cases can be conditions
@@ -255,13 +214,9 @@ C structs:
 Go Structs
 .code struct.go
 
-* Go structures vs classes
-
-- no inheritance
-- no generics
-- enforce composition
-
-.image eighties.jpg 400 _
+: no inheritance
+: no generics
+: enforce composition through embedding
 
 * Methods
 
@@ -297,25 +252,20 @@ static modifier for functions and variables
 
 * Encapsulation in Go:
 
+- The visibility is related to the _package_
+- Multiple files can belong to the same package
+- The visibility is toggled by uppercasing / lowercasing 
+
+
 Every file belongs to a package
 
 	package mypackage
 
 	var Exported int
 	var notExported string
+
 	
-- The visibility is related to the _package_
-- Multiple files can belong to the same package
-- The visibility is toggled by uppercasing / lowercasing 
-
-	import "mypackage"
-
-	var a = mypackage.Exported // ok
-	var b = mypackage.notExported // compiler error 
-
-
-No class related public, private.
-
+	
 * The worst nightmare of every (C) programmer
 
 
@@ -325,13 +275,9 @@ Knock knock.
 Race condition. 
 Who's there?
 
-* Multithreading
-
-A bug in multithreading can result in memory corruption with unexpected and unpredictable results. Moreover, it could happen in very rare situations difficult to reproduce with tests.
-
-What's more, a wrong usage of the locking primitives can result in a deadlock of two or more threads.
-
-*Getting*threading*right*is*difficult*
+: A bug in multithreading can result in memory corruption with unexpected and unpredictable results. Moreover, it could happen in very rare situations difficult to reproduce with tests.
+: What's more, a wrong usage of the locking primitives can result in a deadlock of two or more threads.
+: *Getting*threading*right*is*difficult*
 
 * pthread.h
 
@@ -387,6 +333,7 @@ Channels can be buffered or unbuffered.
 Sending on a full channel blocks the sender, receiving from an empty channel blocks the receiver.
 
 : channels are VALUES
+: origins in csp communicating sequential processes
 
 * Goroutines are indipendent executing actors communicating via channels
 .image concurrency.jpeg
@@ -403,9 +350,6 @@ Definetely easier to reason about
 - Mutexes
 - RW Locks
 - sync.Once
-
-*Bonus*point:*
-Race detector, just build with _-race_ flag
 
 * Everything else
 
@@ -468,6 +412,7 @@ The go runtime is linked together with the executable. The absence of external d
 
 * There's more!
 - reflection
+- race detector
 - C interoperability
 - rich standard library
 - awesome echosystem (https://github.com/avelino/awesome-go)
@@ -475,6 +420,33 @@ The go runtime is linked together with the executable. The absence of external d
 - native cpu and memory profiling
 - cross compiles
 - awesome linters
+
+* What I did expect from Go
+
+* Doing a lot with few lines of code
+
+Javascript
+.code sample.js
+
+Java
+.code sample.java
+
+Kotlin
+.code sample.kt
+
+
+: languages as products. They copy each others and keep adding features
+: Too dense!
+
+* What I found
+Go focuses on
+
+- being explicit rather than implicit
+- being readable
+- being safe
+- getting sh*t done
+
+.image run.png
 
 * Where to go from here
 

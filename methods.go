@@ -10,6 +10,3 @@ func (d *Dog) feed() {
 	d.weight++
 }
 
-var d Dog
-d.bark()
-d.feed() // (*d).feed() 

@@ -1,9 +1,9 @@
-var ages map[string]int = make(map[string]int)
+var values = make(map[string]int)
 
-ages["fede"] = 23
-ages["lore"] = 28
-delete(m, "fede")
+values["pr"] = 23
+values["bdu"] = 28
+delete(m, "bdu")
 
-if age, ok := ages["fede"]; !ok { /* ... */ } // if not found, age = 0 value
+if age, ok := values["pr"]; !ok { /* ... */ } // if not found, age = 0 value
 
 
